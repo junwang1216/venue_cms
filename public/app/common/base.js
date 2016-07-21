@@ -87,5 +87,5 @@
         });
     }
 
-    queryPrintMessage();
+    //queryPrintMessage();
 })(jQuery);

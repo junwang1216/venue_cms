@@ -14,9 +14,12 @@
             lock: true
         });
 
-        $.post('/user/ModifyPasswordSubmit', $("#sc-form-complete").serialize(), function (res) {
+        $.post('/pp/CompleteAccountSubmit', $("#sc-form-complete").serialize(), function (res) {
             if (res.status == 200) {
-                $(".sc-errors").html("完善信息成功");
+                $(".sc-errors").html("完善信息成功! 3秒后跳转首页.");
+                setTimeout(function () {
+                    location.assign('/');
+                }, 3000);
             } else {
                 $(".sc-errors").html(res.message);
             }

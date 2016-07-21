@@ -1,7 +1,10 @@
+var _ = require('underscore');
+
 var Utilities = require("../../util");
 var Log = require("../../model/Log");
 
 var Passport = require("../../model/Passport");
+var Passport_DB = require("../../model/Passport_DB");
 
 var Passport_Controller = function () {};
 
@@ -40,13 +43,13 @@ Passport_Controller.renderUserLogin = function (req, res) {
 Passport_Controller.submitUserLogin = function (req, res) {
     var conditions = req.body;
 
-    Passport.userLogin(conditions).then(function (result) {
+    Passport_DB.userLogin(conditions).then(function (result) {
         if (result.status == 200) {
-            res.cookie(Utilities.Cookies.UserAccountToken, result.data.token, {
+            res.cookie(Utilities.Cookies.UserAccountToken, Passport_DB.generateVerifyToken(), {
                 path: "/",
                 expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
             });
-            result.data.userid = conditions.userid;
+            result.data = result.data[0];
             res.cookie(Utilities.Cookies.UserAccount, JSON.stringify(result.data), {
                 path: "/",
                 expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
@@ -80,35 +83,37 @@ Passport_Controller.submitUserForgetPassword = function (req, res) {
 };
 
 // 用户完善信息页面
-Passport_Controller.renderUserCompleteAccount = function (req, res, next) {
+Passport_Controller.renderUserCompleteAccount = function (req, res) {
     var user = JSON.parse(req.cookies[Utilities.Cookies.UserAccount]);
-    var conditions = {};
 
-    conditions.userid = user.userid;
-    conditions.token = req.cookies[Utilities.Cookies.UserAccountToken];
-
-    Passport.queryUserInfo(conditions).then(function (result) {
-        res.render('passport/passport_modify', {
-            navName: Passport_Controller.navName,
-            navNames: Utilities.NavNames,
-            TopNavigators: [{
-                title: "首页"
-            }, {
-                title: "完善信息"
-            }],
-            data: result.data
-        });
-    }, function (err) {
-        Log.console(err.message, {"interface": "queryUserInfo"});
-        next(err);
+    res.render('passport/passport_modify', {
+        navName: Passport_Controller.navName,
+        navNames: Utilities.NavNames,
+        TopNavigators: [{
+            title: "首页"
+        }, {
+            title: "完善信息"
+        }],
+        data: user
     });
 };
 
 // 用户完善信息提交
 Passport_Controller.submitUserCompleteAccount = function (req, res) {
     var conditions = req.body;
+    var user = JSON.parse(req.cookies[Utilities.Cookies.UserAccount]);
 
-    Passport.setUserCompleteAccount(conditions).then(function (result) {
+    conditions.id = user.id;
+
+    Passport_DB.setUserCompleteAccount(conditions).then(function (result) {
+        if (result.status == 200) {
+            user = _.extend(user, conditions);
+            res.cookie(Utilities.Cookies.UserAccount, JSON.stringify(user), {
+                path: "/",
+                expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
+            });
+        }
+
         res.json(result);
     }, function (err) {
         Log.console(err.message, {"interface": "setUserCompleteAccount"});
@@ -128,17 +133,23 @@ Passport_Controller.renderUserModifyPassword = function (req, res) {
         }, {
             title: "修改密码"
         }],
-        data: {
-            user: JSON.parse(user)
-        }
+        data: JSON.parse(user)
     });
 };
 
 // 用户修改密码提交
 Passport_Controller.submitUserModifyPassword = function (req, res) {
     var conditions = req.body;
+    var user = JSON.parse(req.cookies[Utilities.Cookies.UserAccount]);
 
-    Passport.setUserModifyPassword(conditions).then(function (result) {
+    if (user.password != conditions.oldpassword) {
+        return res.json({
+            status: 500,
+            message: "旧密码输入不正确"
+        })
+    }
+
+    Passport_DB.setUserModifyPassword(conditions).then(function (result) {
         res.json(result);
     }, function (err) {
         Log.console(err.message, {"interface": "setUserModifyPassword"});

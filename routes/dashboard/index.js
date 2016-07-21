@@ -9,9 +9,9 @@ Dashboard_Controller.navName = Utilities.NavNames.Dashboard;
 
 // 首页面板页面
 Dashboard_Controller.renderDashboardIndex = function (req, res) {
-    res.redirect("/venue");
+    //res.redirect("/venue");
 
-    /*var user = req.cookies[Utilities.Cookies.UserAccount];
+    var user = req.cookies[Utilities.Cookies.UserAccount];
     var date = new Date();
     var hours = date.getHours();
 
@@ -37,7 +37,7 @@ Dashboard_Controller.renderDashboardIndex = function (req, res) {
             user: JSON.parse(user),
             welcome: welcome
         }
-    });*/
+    });
 };
 
 // 帮助建议

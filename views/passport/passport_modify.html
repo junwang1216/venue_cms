@@ -17,46 +17,46 @@
         <div class="col-sm-11 col-sm-offset-1">
             {% include "../partial/top_nav.html" %}
             <div class="row">
-                <form id="sc-form-complete" class="form-horizontal" action="/user/CompleteAccountSubmit" method="post"
+                <form id="sc-form-complete" class="form-horizontal" action="/pp/CompleteAccountSubmit" method="post"
                       novalidate>
                     <input type="hidden" name="id" value="<%= id %>">
                     <div class="form-group">
-                        <label for="userid" class="col-sm-2 control-label">
+                        <label for="account" class="col-sm-2 control-label">
                             <span class="text-danger">*</span> 用户名
                         </label>
 
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="userid" name="userid"
-                                   placeholder="用户名" readonly value="<%= data.userid %>" autocomplete="off">
+                            <input type="text" class="form-control" id="account" name="account"
+                                   placeholder="用户名" readonly value="<%= data.account %>" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="user_name" class="col-sm-2 control-label">
+                        <label for="realname" class="col-sm-2 control-label">
                             <span class="text-danger">*</span> 姓名
                         </label>
 
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="user_name" name="username"
+                            <input type="text" class="form-control" id="realname" name="realname"
                                    placeholder="姓名" autocomplete="off"
-                                   data-val="true" data-val-required="用户名不能为空"
-                                   data-val-regex-pattern="^[A-Za-z][A-Za-z0-9_]{6,10}$"
-                                   data-val-regex="用户名长度只能8~12个字符"
-                                   value="<%= data.username %>">
-                            <div data-valmsg-for="username" data-valmsg-replace="true"></div>
+                                   data-val="true" data-val-required="用户姓名不能为空"
+                                   data-val-regex-pattern="^[\u4e00-\u9fa5]{2,5}$"
+                                   data-val-regex="用户姓名长度只能2~5个字符"
+                                   value="<%= data.realname %>">
+                            <div data-valmsg-for="realname" data-valmsg-replace="true"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="identify_number" class="col-sm-2 control-label">
+                        <label for="idnumber" class="col-sm-2 control-label">
                             <span class="text-danger">*</span> 身份证号
                         </label>
 
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="identify_number" name="idcard"
+                            <input type="text" class="form-control" id="idnumber" name="idnumber"
                                    placeholder="身份证号" autocomplete="off"
                                    data-val="true" data-val-required="身份证号不能为空"
                                    data-val-regex-pattern="^\d{18}$|^\d{17}(\d|X|x)$" data-val-regex="身份证号不合法"
-                                   value="<%= data.idcard %>">
-                            <div data-valmsg-for="identify_number" data-valmsg-replace="true"></div>
+                                   value="<%= data.idnumber %>">
+                            <div data-valmsg-for="idnumber" data-valmsg-replace="true"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -65,12 +65,12 @@
                         </label>
 
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="mobile" name="phone"
+                            <input type="number" class="form-control" id="mobile" name="mobile"
                                    placeholder="手机号码" autocomplete="off"
                                    data-val="true" data-val-required="手机号不能为空"
                                    data-val-regex-pattern="^1\d{10}$" data-val-regex="手机号格式错误"
-                                   value="<%= data.phone %>">
-                            <div data-valmsg-for="phone" data-valmsg-replace="true"></div>
+                                   value="<%= data.mobile %>">
+                            <div data-valmsg-for="mobile" data-valmsg-replace="true"></div>
                         </div>
                     </div>
                     <div class="form-group">

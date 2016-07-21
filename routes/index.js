@@ -8,7 +8,6 @@ var Orders = require("./orders");
 var Users = require("./users");
 var Goods = require("./goods");
 var Reports = require("./reports");
-var Promotion = require("./promotion");
 
 // 路由
 var router = express.Router();
