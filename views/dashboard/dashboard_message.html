@@ -1,0 +1,89 @@
+{% extends '../layout.html' %}
+
+{% block title %} 我的消息 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/dashboard/dashboard_index.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="row">
+                <div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">发送消息</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" placeholder="消息内容"></textarea>
+                                </div>
+                                <button type="button" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-send"></span> 发送
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">已发消息</h3>
+                        </div>
+                        <div class="list-group">
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 预订一个订单
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 关于某个页面的问题
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 关于某个页面的问题
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 关于某个页面的问题
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+{% endblock %}

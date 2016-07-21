@@ -1,0 +1,42 @@
+<nav class="sc-page text-right" data-url="<%= url %>" data-max="<%= total %>">
+    <div class="sc-page-go">
+        <span>总<%= total %>页 跳转</span>
+        <input type="text" name="page" value="<%= current %>" class="form-control">
+        <span>页 </span>
+        <a class="btn btn-primary" href="javascript:void(0);">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </a>
+    </div>
+    <ul class="pagination">
+        <li {% if current == 1 %}class="disabled"{% endif %}>
+            {% if current > 1 %}<a href="<%= url %>page=1">{% endif %}
+            <span class="glyphicon glyphicon-fast-backward"></span>
+            {% if current > 1 %}</a>{% endif %}
+        </li>
+        <li {% if current == 1 %}class="disabled"{% endif %}>
+            {% if current > 1 %}<a href="<%= url %>page=<%= current - 1 %>">{% endif %}
+            <span class="glyphicon glyphicon-backward"></span>
+            {% if current > 1 %}</a>{% endif %}
+        </li>
+        {% for index, page in pages %}
+        <li {% if page == current %}class="active"{% endif %}>
+            <a href="<%= url %>page=<%= page %>"><%= page %></a>
+        </li>
+        {% endfor %}
+        {% if current + 3 < total %}
+        <li>
+            <a href="<%= url %>page=<%= current + 4 %>">...</a>
+        </li>
+        {% endif %}
+        <li {% if current == total %}class="disabled"{% endif %}>
+            {% if current < total %}<a href="<%= url %>page=<%= current + 1 %>">{% endif %}
+            <span class="glyphicon glyphicon-forward"></span>
+            {% if current < total %}</a>{% endif %}
+        </li>
+        <li {% if current == total %}class="disabled"{% endif %}>
+            {% if current < total %}<a href="<%= url %>page=<%= total %>">{% endif %}
+            <span class="glyphicon glyphicon-fast-forward"></span>
+            {% if current < total %}</a>{% endif %}
+        </li>
+    </ul>
+</nav>

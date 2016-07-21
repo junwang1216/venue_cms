@@ -1,0 +1,13 @@
+sftp-config.json
+.DS_Store
+**/.DS_Store
+local
+**/node_modules
+.idea
+dist
+views-dist
+public-dist
+npm-debug.log
+public/style/**/*.css
+public/style/**/**/*.css
+docs

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}管理员端 - 场馆运营预订平台{% endblock %}</title>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link href="/public/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    {% block head %}
+    <link href="/public/lib/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/lib/jquery/gooey/gooey.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/lib/jquery/tiny-alert/jquery.alert.css" rel="stylesheet" type="text/css">
+    <!--STYLE_PLACEHOLDER-->
+    {% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    {% block scripts %}
+    <!--SCRIPT_PLACEHOLDER-->
+    <script src="/public/lib/jquery/jquery-1.12.3.min.js"></script>
+    <script src="/public/lib/jquery/gooey/gooey.min.js"></script>
+    <script src="/public/lib/jquery/cookie/jquery.cookie-1.4.1.min.js"></script>
+    <script src="/public/lib/jquery/tiny-alert/jquery.alert.js"></script>
+    <script src="/public/lib/jquery/validate/jquery.validate.min.js"></script>
+    <script src="/public/lib/jquery/validate/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/public/app/common/base.js?__inline"></script>
+    <script src="/public/app/users/users_card.js?__inline"></script>
+    {% endblock %}
+</body>
+</html>

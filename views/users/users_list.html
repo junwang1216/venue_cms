@@ -1,0 +1,209 @@
+{% extends '../layout.html' %}
+
+{% block title %} 会员列表 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/users/users_list.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            {% include "../partial/users_card.html" %}
+            <div class="sc-form-search">
+                <form id="user_search_form" class="form-inline" novalidate onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="user_no">会员号</label>
+                        <input type="text" class="form-control" id="user_no" name="memberid"
+                               value="<%= conditions.memberid %>" placeholder="会员号" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_name">会员名</label>
+                        <input type="text" class="form-control" id="user_name" name="membername"
+                               value="<%= conditions.membername %>" placeholder="会员名" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_mobile">手机号</label>
+                        <input type="text" class="form-control" id="user_mobile" name="phone"
+                               value="<%= conditions.phone %>" placeholder="手机号" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="card_level">会员卡级别</label>
+                        <select class="form-control" id="card_level" name="memberlevel">
+                            {% for level in CardLevels %}
+                            {% if level.value != 3 %}
+                            <option value="<%= level.value %>"
+                                    {% if conditions.memberlevel === level.value %} selected="selected" {% endif %}
+                            ><%= level.text %></option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_card_no">会员卡号</label>
+                        <input type="text" class="form-control" id="user_card_no" name="cardnumber"
+                               value="<%= conditions.cardnumber %>" placeholder="会员卡号" autocomplete="off">
+                    </div>
+                    <!--
+                    <div class="form-group">
+                        <label for="user_state">会员状态</label>
+                        <select class="form-control" id="user_state" name="state">
+                            {% for state in UserStates %}
+                            <option value="<%= level.value %>"
+                                    {% if conditions.state == state.value %} selected="selected" {% endif %}
+                            ><%= state.text %></option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    -->
+                    <div class="form-group">
+                        <button class="btn btn-primary sc-search">
+                            <span class="glyphicon glyphicon-search"></span> 搜索
+                        </button>
+                        <button class="btn btn-primary sc-export">
+                            <span class="glyphicon glyphicon-export"></span> 导出
+                        </button>
+                    </div>
+                    <div class="form-group pull-right">
+                        <a class="btn btn-primary" href="/users/Add">
+                            <span class="glyphicon glyphicon-plus"></span> 增加会员
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive sc-table users-list">
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="primary sc-table-header">
+                        <th class="sort" data-name="memberid">
+                            会员号
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </th>
+                        <th class="sort" data-name="membername">
+                            会员名
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </th>
+                        <th class="sort" data-name="phone">
+                            手机号码
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </th>
+                        <th class="sort" data-name="cardnumber">
+                            会员卡号
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </th>
+                        <th class="sort" data-name="balance">
+                            余额
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </th>
+                        <th class="sort" data-name="validityperiod">
+                            有效期至
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </th>
+                        <th class="sort" data-name="vicecardnum">
+                            副卡
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in data.users %}
+                    {% if UserStates.Cancel.value != user.state %}
+                    <tr>
+                        <td><%= user.memberid %></td>
+                        <td><%= user.membername %></td>
+                        <td><%= user.phone %></td>
+                        <td><%= user.cardnumber || '无' %></td>
+                        <td><%= user.balance || '无' %></td>
+                        <td><%= user.validityperiod || '无' %></td>
+                        <td>
+                            {% if user.vicecardnum %}
+                            <a href="/users/<%= user.memberid %>/ViceCards?card=<%= user.cardnumber %>">
+                                <%= user.vicecardnum %>张</a>
+                            {% endif %}
+                            {% if !user.vicecardnum && user.cardnumber %}
+                            <a href="/users/<%= user.memberid %>/ViceCards?card=<%= user.cardnumber %>">去绑定</a>
+                            {% endif %}
+                            {% if !user.vicecardnum && !user.cardnumber %}无{% endif %}
+                        </td>
+                        <td>
+                            {% if user.cardnumber %}
+                            <button class="btn btn-primary users-money-card" data-id="<%= user.memberid %>">
+                                <span class="glyphicon glyphicon-usd"></span> 充值
+                            </button>
+                            <button class="btn btn-primary users-bind-card" data-id="<%= user.memberid %>"
+                                    data-name="<%= user.membername %>" data-card="<%= user.cardnumber %>">
+                                <span class="glyphicon glyphicon-credit-card"></span> 挂失
+                            </button>
+                            {% else %}
+                            <button class="btn btn-primary users-bind-card" data-id="<%= user.memberid %>"
+                                    data-name="<%= user.membername %>">
+                                <span class="glyphicon glyphicon-credit-card"></span> 发卡
+                            </button>
+                            {% endif %}
+                            <a class="btn btn-primary" href="/users/View/<%= user.memberid %>">
+                                <span class="glyphicon glyphicon-search"></span> 查看
+                            </a>
+                            <a class="btn btn-primary" href="/users/Edit/<%= user.memberid %>">
+                                <span class="glyphicon glyphicon-edit"></span> 修改
+                            </a>
+                            <button class="btn btn-danger users-remove" data-id="<%= user.memberid %>"
+                                    data-name="<%= user.membername %>" data-card="<%= user.cardnumber %>">
+                                <span class="glyphicon glyphicon-remove"></span> 注销
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td><%= user.memberid %></td>
+                        <td><%= user.membername %></td>
+                        <td><%= user.phone %></td>
+                        <td><%= user.cardnumber || '无' %></td>
+                        <td><%= user.balance || '无' %></td>
+                        <td><%= user.validityperiod || '无' %></td>
+                        <td>
+                            {% if user.vicecardnum %}<%= user.vicecardnum %>张{% endif %}
+                            {% if !user.vicecardnum && user.cardnumber %}去绑定{% endif %}
+                            {% if !user.vicecardnum && !user.cardnumber %}无{% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="/users/View/<%= user.memberid %>">
+                                <span class="glyphicon glyphicon-search"></span> 查看
+                            </a>
+                            <button class="btn btn-warning" disabled="disabled">
+                                <span class="glyphicon glyphicon-remove"></span> 已注销
+                            </button>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if data.pagination.total > 1 %}
+                {% include "../partial/page.html" with data.pagination %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sc-ui-dialog-overlay" style="display: none;"></div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/app/users/users_list.js?__inline"></script>
+{% endblock %}

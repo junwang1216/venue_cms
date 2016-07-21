@@ -1,0 +1,43 @@
+{% extends '../layout.html' %}
+
+{% block title %} 首页 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/dashboard/dashboard_index.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <p><%= data.user.username %><%= data.welcome %>, 欢迎使用场馆运营预订平台, <a href="/pp/CompleteAccount" class="btn btn-link">账号设置</a></p>
+            <p>您上次登录的时间是2015-04-21 11:11:43 (不是您登录的, <a href="/pp/ModifyPassword">修改密码</a>)</p>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-sm-6">
+                            <div id="chart1" style="width: 100%;height:400px;"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div id="chart2" style="width: 100%;height:400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/lib/echarts/echarts.min.js"></script>
+<script src="/public/app/dashboard/dashboard_index.js?__inline"></script>
+{% endblock %}

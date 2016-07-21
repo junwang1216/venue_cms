@@ -1,0 +1,75 @@
+{% extends '../layout.html' %}
+
+{% block title %} 订单列表 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/orders/orders_list.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="table-responsive sc-table sc-print-orders">
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="sc-table-header">
+                        <th>订单号</th>
+                        <th>场地类型</th>
+                        <th>预订日期</th>
+                        <th>预订渠道</th>
+                        <th>会员类别</th>
+                        <th>手机号</th>
+                        <th>金额(元)</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in data.orders %}
+                    <tr>
+                        <td><%= order.orderno %></td>
+                        <td><%= order.siteshow %></td>
+                        <td><%= order.date %></td>
+                        <td><%= order.channelshow %></td>
+                        <td><%= order.usershow %></td>
+                        <td><%= order.phone %></td>
+                        <td><%= order.amount %></td>
+                        <td>
+                            {% if order.printstate == PrintState.No.value %}
+                            <a class="btn btn-primary order-print" href="javascript:void(0);"
+                               data-no="<%= order.orderno %>">
+                                <span class="glyphicon glyphicon-print"></span> 立即打印
+                            </a>
+                            {% else %}
+                            <a class="btn btn-default order-reprint" href="javascript:void(0);"
+                               data-no="<%= order.orderno %>">
+                                <span class="glyphicon glyphicon-print"></span> 重新打印
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if data.pagination.total > 1 %}
+                {% include "../partial/page.html" with data.pagination %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sc-ui-dialog-overlay" style="display: none;"></div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/app/common/print.js?__inline"></script>
+<script src="/public/app/orders/orders_print_list.js?__inline"></script>
+{% endblock %}

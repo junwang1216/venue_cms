@@ -1,0 +1,185 @@
+@charset "utf-8"
+@import "../base"
+
+.sc-main
+    .pop-booking-pay
+        min-width 700px
+        max-width 800px
+        position absolute
+        z-index 100
+        left 140px
+        top 20px
+        .wizard
+            .content
+                min-height 0
+                .body
+                    float none
+                    position inherit
+                    height auto
+                    padding 2.5% 2.5% 0 2.5%
+                    width 100%
+        .btn-booking-pay-close
+            padding 6px 10px
+            margin-top -7px
+    .sc-venue-booking-date
+        position absolute
+        left 30%
+        top 80px
+        width 400px
+        z-index 100
+        .dialog
+            .dialog-btn
+                width 120px
+    .sc-booking-info
+        position absolute
+        left 30%
+        top 80px
+        width 400px
+        z-index 100
+        .info-close
+            margin-top -7px
+    .sc-venue-booking-switch
+        position absolute
+        left 30%
+        top 80px
+        width 400px
+        z-index 100
+        .switch-close
+            margin-top -7px
+    .sc-venue-sports
+        padding-right 0
+        .sports-list
+            margin-top 3px
+            .sports-item
+                .sports-icon
+                    width 16px
+                    margin-right 2px
+            .btn-default
+                .sports-inactive
+                    display inline-block
+                .sports-active
+                    display none
+            .btn-primary
+                .sports-active
+                    display inline-block
+                .sports-inactive
+                    display none
+    .sc-venue-date
+        width 100%
+        overflow hidden
+        ul
+            padding 0 29px
+            list-style none
+            width 1206px
+            height 39px
+            margin-bottom 0
+            li.date
+                margin-right 2px
+                display inline-block
+                float left
+                text-align center
+                background #efedef
+                width 80px
+                border 1px solid #d6d6d6
+                a
+                    color #666666
+                    text-decoration none
+                span
+                    display block
+                .date-day
+                    font-size 12px
+            li.date-active
+                background #337ab7
+                border 1px solid #337ab7
+                a
+                    color #FFFFFF
+        .date-slider
+            position absolute
+            width 30px
+            height 39px
+            background #F5FAFF
+            img
+                width 100%
+                margin-top 5px
+        .date-slider-back
+            left 14px
+        .date-slider-forward
+            right 14px
+    .sc-venue-booking
+        min-width 1158px
+        padding-right 0
+        .sc-booking-area
+            margin-top 10px
+            overflow auto
+            .sc-booking-location
+                text-align left
+                float left
+                color #fff
+                padding 0
+                width 100px
+                li.location
+                    text-align center
+                    padding 6px
+                    width 100px
+                    height 40px
+                    background #337ab7
+                    border-top 1px solid #F5FAFF
+            .sc-booking-time
+                color #fff
+                margin 0
+                text-align center
+                padding 0
+                height 32px
+                li.time
+                    padding 6px
+                    display inline-block
+                    float left
+                    width 80px
+                    background #337ab7
+                    border-left 1px solid #F5FAFF
+                li.time-head
+                    width 100px
+                    border-left-style none
+            .sc-booking-select
+                float left
+                text-align center
+                tr
+                    td
+                        font-size 12px
+                        cursor pointer
+                        width 80px
+                        height 40px
+                        color #fff
+                        border 1px solid #F5FAFF
+                        vertical-align middle
+                        text-align center
+                        p
+                            margin 0
+                            padding 0
+                            text-align center
+                        .ordered-channel-mobile
+                            display inline-block
+                            background url("/public/images/icons/mobile.png") center no-repeat
+                            background-size 100% 100%
+                            float left
+                            width 17px
+                            height 17px
+                        .ordered-channel-pc
+                            display inline-block
+                            background url("/public/images/icons/mark.png") center no-repeat
+                            background-size 100% 100%
+                            float left
+                            width 17px
+                            height 17px
+                        .ordered-mobile
+                            clear both
+        .sc-booking-tips
+            .tips-item
+                width 80px
+                font-size 12px
+                span
+                    display inline-block
+                    width 20px
+                    height 10px
+                    margin-right 4px
+

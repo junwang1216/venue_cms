@@ -1,0 +1,84 @@
+{% extends '../layout.html' %}
+
+{% block title %} 帮助建议 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/dashboard/dashboard_index.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="row">
+                <ul class="nav nav-pills pull-right sc-nav-reports">
+                    <li role="presentation"><a href="/venue/Helps">场馆预订</a></li>
+                    <li role="presentation"><a href="/users/Helps">会员档案</a></li>
+                    <li role="presentation"><a href="javascript:void(0);">数据统计</a></li>
+                    <li role="presentation"><a href="javascript:void(0);">商品管理</a></li>
+                </ul>
+
+                <div class="sc-ui-helps">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">用户意见反馈</h3>
+                        </div>
+                        <div class="list-group">
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 关于某个页面的问题
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 关于某个页面的问题
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 关于某个页面的问题
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                            <a class="checkbox list-group-item">
+                                <label>
+                                    <input type="checkbox" value="option1" name="option">
+                                    [手机号: *1234][2016-07-01]: 关于某个页面的问题
+                                </label>
+                            </a>
+                            <div class="well">
+                                问题描述问题描述问题描述问题描述问题描述, 问题描述问题描述问题描述, 问题描述问题描述问题描述.
+                            </div>
+                        </div>
+                        {% include "../partial/page.html" with data.pagination %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/lib/socket.io-client-1.4.6/socket.io.js"></script>
+<script src="/public/app/common/socket.js?__inline"></script>
+{% endblock %}

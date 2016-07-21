@@ -1,0 +1,42 @@
+<!--<div class="sc-ui-top">
+    <ol class="breadcrumb">
+        {% for nav in TopNavigators %}
+        {% if !loop.last && !loop.first %}
+        <li><a href="<%= nav.url %>"><%= nav.title %></a></li>
+        {% else %}
+        <li class="active"><%= nav.title %></li>
+        {% endif %}
+        {% endfor %}
+    </ol>
+    {% if navName == navNames.Notification %}
+    <a href="/message" class="btn btn-primary pull-right">&gt;&gt; 消息管理</a>
+    {% endif %}
+    {% if navName == navNames.Message %}
+    <a href="/notification" class="btn btn-primary pull-right">&gt;&gt; 通知管理</a>
+    {% endif %}
+</div>-->
+<div class="alert alert-info header-tips-message" style="display: none;">
+    <img src="/public/images/icons/speaker.png"><span class="message"></span>
+    <a href="/orders/PrintList?printstate=0" class="btn btn-primary pull-right">
+        <span class="glyphicon glyphicon-search"></span> 查看
+    </a>
+</div>
+<div class="row sc-path">
+    <ol class="breadcrumb">
+        {% for nav in TopNavigators %}
+        {% if !loop.last && !loop.first %}
+        <li><a href="<%= nav.url %>"><%= nav.title %></a></li>
+        {% else %}
+        <li class="active"><%= nav.title %></li>
+        {% endif %}
+        {% endfor %}
+    </ol>
+    {% if navName == navNames.Notification %}
+    <a href="/message" class="btn btn-primary pull-right">&gt;&gt; 消息管理</a>
+    {% endif %}
+    {% if navName == navNames.Message %}
+    <a href="/notification" class="btn btn-primary pull-right">&gt;&gt; 通知管理</a>
+    {% endif %}
+</div>
+
+{% include "../partial/users_card_recharge.html" %}

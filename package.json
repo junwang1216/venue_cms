@@ -1,0 +1,37 @@
+{
+  "name": "venue",
+  "description": "a venue operation website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "mocha test --growl --colors --reporter spec"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "connect-redis": "*",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-session": "1.9.1",
+    "express-useragent": "^0.2.0",
+    "morgan": "~1.6.1",
+    "multiparty": "^4.1.2",
+    "n-crypto": "^0.1.4",
+    "node-excel-export": "^1.2.0",
+    "q": "^1.4.1",
+    "qiniu": "^6.1.11",
+    "request": "^2.67.0",
+    "serve-favicon": "~2.3.0",
+    "stylus": "*",
+    "swig": "~1.4.2",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "fis3": "^3.2.0",
+    "fis-parser-stylus2": "*",
+    "fis3-deploy-local-deliver": "^1.0.0",
+    "fis3-postpackager-loader": "^1.3.2"
+  },
+  "license": "MIT"
+}

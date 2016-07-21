@@ -1,0 +1,94 @@
+{% extends '../layout.html' %}
+
+{% block title %} 商品列表 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/goods/goods_list.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="sc-form-search">
+                <form id="good_search_form" class="form-inline" novalidate onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="good_name">商品标题</label>
+                        <input type="text" class="form-control" id="good_name" name="name"
+                               value="<%= conditions.name %>" placeholder="商品标题" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="good_min_price">最低价格</label>
+                        <input type="text" class="form-control" id="good_min_price" name="pricemin"
+                               value="<%= conditions.pricemin %>" placeholder="最低价格" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="good_max_price">最高价格</label>
+                        <input type="text" class="form-control" id="good_max_price" name="pricemax"
+                               value="<%= conditions.pricemax %>" placeholder="最高价格" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary sc-search">
+                            <span class="glyphicon glyphicon-search"></span> 搜索
+                        </button>
+                        <button class="btn btn-primary sc-export">
+                            <span class="glyphicon glyphicon-export"></span> 导出
+                        </button>
+                    </div>
+                    <div class="form-group pull-right">
+                        <a class="btn btn-primary" href="/goods/Add">
+                            <span class="glyphicon glyphicon-plus"></span> 增加商品
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive sc-table goods-list">
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="primary sc-table-header">
+                        <th>商品图片</th>
+                        <th>商品编号</th>
+                        <th>商品标题</th>
+                        <th>商品价格(元)</th>
+                        <th>商品描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for good in data.goods %}
+                    <tr>
+                        <td><img class="good-image" src="<%= good.photourl || '/public/images/null.jpg' %>"></td>
+                        <td><%= good.goodsid %></td>
+                        <td><%= good.name %></td>
+                        <td><%= good.price %></td>
+                        <td><%= good.describe || '无' %></td>
+                        <td>
+                            <button class="btn btn-danger goods-remove" data-id="<%= good.goodsid %>"
+                                    data-name="<%= good.name %>">
+                                <span class="glyphicon glyphicon-trash"></span> 下架
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if data.pagination.total > 1 %}
+                {% include "../partial/page.html" with data.pagination %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/app/goods/goods_list.js?__inline"></script>
+{% endblock %}

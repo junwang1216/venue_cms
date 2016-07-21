@@ -1,0 +1,147 @@
+{% extends '../layout.html' %}
+
+{% block title %} 营业收入 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/reports/reports_index.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="row">
+                <ul class="nav nav-pills pull-right sc-nav-reports">
+                    <li role="presentation"><a href="/reports">场地使用率</a></li>
+                    <li role="presentation" class="active"><a href="javascript:void(0);">营业收入统计</a></li>
+                    <li role="presentation"><a href="/">会员收入统计</a></li>
+                    <li role="presentation"><a href="/">商品收入统计</a></li>
+                </ul>
+                <!--<div class="col-sm-12">
+                    <div class="col-sm-8">
+                        <div id="chart1" style="width: 100%;height:400px;"></div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="chart2" style="width: 100%;height:400px;"></div>
+                    </div>
+                </div>-->
+                <div class="col-sm-12">
+                    <form id="reports_search_form" novalidate onsubmit="return false;" class="form-horizontal">
+                        <!--<div class="help-block">请选择要统计的时间, 或者输入时间区间点击统计.</div>-->
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <a href="javascript:void(0);" class="btn btn-primary sc-today">
+                                    <span class="glyphicon glyphicon-stats"></span> 今天
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-primary sc-week">
+                                    <span class="glyphicon glyphicon-stats"></span> 最近7天
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-primary sc-month">
+                                    <span class="glyphicon glyphicon-stats"></span> 最近30天
+                                </a>
+                            </div>
+                            <input type="hidden" value="<%= conditions.selectdate || '' %>" name="selectdate">
+                            <div class="col-sm-6">
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" name="startdate" id="start_date"
+                                           autocomplete="off" value="<%= conditions.startdate || '' %>">
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" name="enddate" id="end_date"
+                                           autocomplete="off" value="<%= conditions.enddate || '' %>">
+                                </div>
+                                <div class="col-sm-2">
+                                    <a class="btn btn-primary sc-search" href="javascript:;">
+                                        <span class="glyphicon glyphicon-stats"></span> 统计
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-primary pull-right sc-export" href="javascript:;">
+                                    <span class="glyphicon glyphicon-export"></span> 报表导出
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive sc-table">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="primary sc-table-header">
+                                <th>编号</th>
+                                <th>商品类别</th>
+                                <th>金额</th>
+                                <th>折扣</th>
+                                <th>抹零</th>
+                                <th>实际金额</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in data.reports.List %}
+                            <tr>
+                                <td><%= item.number %></td>
+                                <td><%= item.commoditycategory %></td>
+                                <td>￥<%= item.smountmoney || "0.00" %></td>
+                                <td>￥<%= item.discount || "0.00" %></td>
+                                <td>￥<%= item.smallchange || "0.00" %></td>
+                                <td>￥<%= item.actualamount || "0.00" %></td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="2">合计</td>
+                                <td>￥<%= data.reports.amounttotal || "0.00" %></td>
+                                <td>￥<%= item.discounttotal || "0.00" %></td>
+                                <td>￥<%= item.smallchangetotal || "0.00" %></td>
+                                <td>￥<%= item.actualamounttotal || "0.00" %></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-responsive sc-table">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td>营业款总额</td>
+                                    <td>￥<%= data.reports.salesamounttotal || "0.00" %></td>
+                                </tr>
+                                <tr>
+                                    <td>现金</td>
+                                    <td>￥<%= data.reports.cash || "0.00" %></td>
+                                </tr>
+                                <tr>
+                                    <td>支票</td>
+                                    <td>￥<%= data.reports.check || "0.00" %></td>
+                                </tr>
+                                <tr>
+                                    <td>微信支付</td>
+                                    <td>￥<%= data.reports.wechatpayment || "0.00" %></td>
+                                </tr>
+                                <tr>
+                                    <td>银行卡</td>
+                                    <td>￥<%= data.reports.bankcard || "0.00" %></td>
+                                </tr>
+                                <tr>
+                                    <td>支付宝</td>
+                                    <td>￥<%= data.reports.alipay || "0.00" %></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/lib/echarts/echarts.min.js"></script>
+<script src="/public/app/reports/reports_revenue.js?__inline"></script>
+{% endblock %}

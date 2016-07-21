@@ -1,0 +1,50 @@
+{% extends '../layout.html' %}
+
+{% block title %} 用户登录 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/passport/passport_login.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid sc-main">
+    <h1 class="text-center"><img src="/public/images/logo.png" alt="171中学"></h1>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 sc-login">
+            <form id="sc-form-login" action="/pp/LoginSubmit" method="POST" novalidate onsubmit="return false;">
+                <h2 class="text-center sc-title">场馆运营预订平台</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="userid" name="userid"
+                           placeholder="用户名" autocomplete="off"
+                           data-val="true" data-val-required="用户名不能为空"
+                           data-val-regex-pattern="^[A-Za-z][A-Za-z0-9_]{2,10}$" data-val-regex="用户名长度只能3~12个字符">
+                    <div data-valmsg-for="userid" data-valmsg-replace="true"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="密码" autocomplete="off"
+                           data-val="true" data-val-required="密码不能为空">
+                    <div data-valmsg-for="password" data-valmsg-replace="true"></div>
+                </div>
+                <p class="text-danger text-center sc-errors"></p>
+                <div class="form-group text-center sc-btns">
+                    <a href="javascript:void(0);" class="btn btn-primary user-login">登 录</a>
+                    <!--<a href="/pp/ForgetPassword" class="btn btn-danger sc-forget">忘记密码</a>-->
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/lib/jquery/validate/jquery.validate.min.js"></script>
+<script src="/public/lib/jquery/validate/jquery.validate.unobtrusive.min.js"></script>
+<script src="/public/app/passport/passport_login.js?__inline"></script>
+{% endblock %}

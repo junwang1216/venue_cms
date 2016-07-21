@@ -1,0 +1,72 @@
+{% extends '../layout.html' %}
+
+{% block title %} 订单详情 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/orders/orders_list.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="row sc-form-search">
+                <form id="order_search_form" class="form-inline" novalidate onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="order_no">订单号</label>
+                        <input type="text" class="form-control" id="order_no" name="orderno"
+                               value="<%= conditions.orderno %>" placeholder="订单号" autocomplete="off" readonly
+                               style="width: 240px;">
+                    </div>
+                    <div class="form-group">
+                        <a href="/orders/View/<%= conditions.orderno %>/Exports" class="btn btn-primary sc-export">
+                            <span class="glyphicon glyphicon-export"></span> 导出
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive sc-table sc-ui-orders">
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="sc-table-header">
+                        <th>场地预定编号</th>
+                        <th>场地编号</th>
+                        <th>预订日期</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>预订状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in data.orders %}
+                    <tr>
+                        <td><%= order.id %></td>
+                        <td><%= order.sitenumber %></td>
+                        <td><%= order.date %></td>
+                        <td><%= order.starttime %></td>
+                        <td><%= order.endtime %></td>
+                        <td class="<%= order.stateclass %>"><%= order.stateshow %></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if data.pagination.total > 1 %}
+                {% include "../partial/page.html" with data.pagination %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sc-ui-dialog-overlay" style="display: none;"></div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+{% endblock %}

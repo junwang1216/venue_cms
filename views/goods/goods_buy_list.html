@@ -1,0 +1,61 @@
+{% extends '../layout.html' %}
+
+{% block title %} 商品列表 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/goods/goods_buy_list.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="sc-form-search clearfix">
+                <div class="form-group pull-right" style="margin-top:-55px;">
+                    <a class="btn btn-warning good-cart-count" href="javascript:void(0);">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> 购物车<span class="badge"><%= data.cart %></span>
+                    </a>
+                    <a class="btn btn-primary" href="/goods/List">
+                        <span class="glyphicon glyphicon-list"></span> 商品管理
+                    </a>
+                </div>
+            </div>
+            <div class="row goods-buy-list">
+                {% for good in data.goods %}
+                <div class="col-sm-2 goods-list-item">
+                    <div class="thumbnail">
+                        <img class="good-image" src="<%= good.photourl || '/public/images/null.jpg' %>" alt="<%= good.name %>">
+                        <div class="caption">
+                            <p class="good-name"><%= good.name %></p>
+                            <p class="good-price-btn">
+                                <span class="good-price"><%= good.price %></span> 元
+                                <a href="javascript:void(0);" class="btn btn-primary btn-xs pull-right good-cart-add"
+                                   data-id="<%= good.goodsid %>">
+                                    <span class="glyphicon glyphicon-plus"></span> 购物车
+                                </a>
+                            </p>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if data.pagination.total > 1 %}
+            {% include "../partial/page.html" with data.pagination %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/app/goods/goods_buy_list.js?__inline"></script>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends '../layout.html' %}
+
+{% block title %} 系统设置 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/dashboard/dashboard_index.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            <div class="row">
+                <div class="col-sm-6 sc-ui-venue-settings">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">场次预订配置</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="day">提前预订的天数</label>
+                                <input type="text" class="form-control" id="day" name="day" placeholder="提前预订的天数">
+                            </div>
+                            <div class="form-group">
+                                <label>每场次持续的时间</label>
+
+                                <div class="venue-time-length">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="timelength" id="time-length1" value="1"> 1小时
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="timelength" id="time-length2" value="2"> 2小时
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>每天可预订的时间</label>
+
+                                <div class="venue-times">
+                                    <a href="javascript:void(0)" class="btn btn-default">00:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">01:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">02:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">03:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">04:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">05:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">06:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">07:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">08:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">09:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">10:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">11:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">12:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">13:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">14:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">15:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">16:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">17:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">18:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">19:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary">20:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">21:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">22:00</a>
+                                    <a href="javascript:void(0)" class="btn btn-default">23:00</a>
+                                </div>
+                            </div>
+                            <div class="venue-submit">
+                                <a class="btn btn-primary venue-save" href="javascript:void(0);">保存</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 sc-ui-role-settings">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">会员角色设置</div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="role-name" name="role-name"
+                                       placeholder="角色名称">
+                                <a href="javascript:void(0)" class="input-group-addon role-add">增加</a>
+                            </div>
+                            <p class="help-block">已经存在的角色,可以点击删除</p>
+
+                            <div class="role-selected">
+                                <input type="hidden" id="role-names" name="role-names" value="">
+                                <a href="javascript:void(0)" class="btn btn-default">
+                                    管理员 <span class="glyphicon glyphicon-remove text-danger"></span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-default">
+                                    学校教师 <span class="glyphicon glyphicon-remove text-danger"></span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-default">
+                                    VIP会员 <span class="glyphicon glyphicon-remove text-danger"></span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-default">
+                                    会员散客 <span class="glyphicon glyphicon-remove text-danger"></span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-default">
+                                    临时散客 <span class="glyphicon glyphicon-remove text-danger"></span>
+                                </a>
+                            </div>
+                            <div class="role-submit">
+                                <a class="btn btn-primary role-save" href="javascript:void(0);">保存</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/app/dashboard/dashboard_settings.js?__inline"></script>
+{% endblock %}

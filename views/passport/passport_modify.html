@@ -1,0 +1,113 @@
+{% extends '../layout.html' %}
+
+{% block title %} 完善信息 - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/passport/passport_modify.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid ">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1">
+            {% include "../partial/top_nav.html" %}
+            <div class="row">
+                <form id="sc-form-complete" class="form-horizontal" action="/user/CompleteAccountSubmit" method="post"
+                      novalidate>
+                    <input type="hidden" name="id" value="<%= id %>">
+                    <div class="form-group">
+                        <label for="userid" class="col-sm-2 control-label">
+                            <span class="text-danger">*</span> 用户名
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userid" name="userid"
+                                   placeholder="用户名" readonly value="<%= data.userid %>" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_name" class="col-sm-2 control-label">
+                            <span class="text-danger">*</span> 姓名
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_name" name="username"
+                                   placeholder="姓名" autocomplete="off"
+                                   data-val="true" data-val-required="用户名不能为空"
+                                   data-val-regex-pattern="^[A-Za-z][A-Za-z0-9_]{6,10}$"
+                                   data-val-regex="用户名长度只能8~12个字符"
+                                   value="<%= data.username %>">
+                            <div data-valmsg-for="username" data-valmsg-replace="true"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="identify_number" class="col-sm-2 control-label">
+                            <span class="text-danger">*</span> 身份证号
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="identify_number" name="idcard"
+                                   placeholder="身份证号" autocomplete="off"
+                                   data-val="true" data-val-required="身份证号不能为空"
+                                   data-val-regex-pattern="^\d{18}$|^\d{17}(\d|X|x)$" data-val-regex="身份证号不合法"
+                                   value="<%= data.idcard %>">
+                            <div data-valmsg-for="identify_number" data-valmsg-replace="true"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile" class="col-sm-2 control-label">
+                            <span class="text-danger">*</span> 手机号
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="mobile" name="phone"
+                                   placeholder="手机号码" autocomplete="off"
+                                   data-val="true" data-val-required="手机号不能为空"
+                                   data-val-regex-pattern="^1\d{10}$" data-val-regex="手机号格式错误"
+                                   value="<%= data.phone %>">
+                            <div data-valmsg-for="phone" data-valmsg-replace="true"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+                            <span class="text-danger">*</span> 邮箱
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="邮箱" autocomplete="off"
+                                   data-val="true" data-val-required="邮箱不能为空"
+                                   data-val-regex-pattern="^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$" data-val-email="邮箱格式错误"
+                                   value="<%= data.email %>">
+                            <div data-valmsg-for="email" data-valmsg-replace="true"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group sc-ui-submit">
+                        <div class="col-sm-10 text-center">
+                            <p class="sc-submit-tips"></p>
+                            <button class="btn btn-primary sc-submit">
+                                <span class="glyphicon glyphicon-ok"></span> 保存
+                            </button>
+                            <a href="/" class="btn btn-default">
+                                <span class="glyphicon glyphicon-arrow-left"></span> 返回
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/app/passport/passport_modify.js?__inline"></script>
+{% endblock %}

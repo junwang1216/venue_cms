@@ -1,0 +1,230 @@
+{% extends '../layout.html' %}
+
+{% block title %} {% if isEdit %} 会员修改 {% else %} 会员添加 {% endif %} - 场馆运营预订平台 {% endblock %}
+
+{% block head %}
+{% parent %}
+<!--STYLE_PLACEHOLDER-->
+<link href="/public/style/users/users_list.css?__inline" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+{% include "../partial/header.html" %}
+<div class="container-fluid ">
+    <div class="row">
+        {% include "../partial/nav.html" %}
+        <div class="col-sm-11 col-sm-offset-1 sc-main">
+            {% include "../partial/top_nav.html" %}
+            {% include "../partial/users_card.html" %}
+            <div class="row">
+                <form id="user_form" class="form-horizontal" action="" method="post" novalidate
+                      onsubmit="return false;">
+                    <input type="hidden" id="is_edit" value="<%= data.isEdit %>">
+                    <input type="hidden" id="user_card_no" value="<%= data.users.cardnumber %>">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="user_no" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 会员号
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="user_no" name="memberid"
+                                       placeholder="会员编号" value="<%= data.memberid %>" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_name" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 会员名
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="user_name" name="membername"
+                                       placeholder="会员名, 例: 张三" autocomplete="off"
+                                       data-val="true" data-val-required="会员名不能为空"
+                                       data-val-regex-pattern="^[A-Za-z\u4e00-\u9fa5][A-Za-z0-9\u4e00-\u9fa5_]{1,10}$"
+                                       data-val-regex="会员名长度只能2~12个字符"
+                                       value="<%= data.users.membername %>">
+                                <div data-valmsg-for="membername" data-valmsg-replace="true"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_mobile" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 手机号码
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="user_mobile" name="phone"
+                                       placeholder="手机号码" autocomplete="off"
+                                       data-val="true" data-val-required="手机号码不能为空"
+                                       data-val-regex-pattern="^1\d{10}$"
+                                       data-val-regex="手机号码格式错误"
+                                       value="<%= data.users.phone %>">
+                                <div data-valmsg-for="phone" data-valmsg-replace="true"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_sex1" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 性别
+                            </label>
+
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+                                    <input type="radio" name="sex" id="user_sex1" value="0"
+                                           {% if data.users.sex == 0 %} checked="checked" {% endif %}> 男
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="sex" id="user_sex2" value="1"
+                                           {% if data.users.sex == 1 %} checked="checked" {% endif %}> 女
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_card" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 身份证号码
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="user_card" name="idnumber"
+                                       placeholder="18位身份证号码" autocomplete="off"
+                                       data-val="true" data-val-required="身份证号码不能为空"
+                                       data-val-regex-pattern="^\d{18}$|^\d{17}(\d|X|x)$"
+                                       data-val-regex="身份证号码格式错误"
+                                       value="<%= data.users.idnumber %>">
+                                <div data-valmsg-for="idnumber" data-valmsg-replace="true"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="user_level" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 会员级别
+                            </label>
+
+                            <div class="col-sm-8">
+                                <select class="form-control" id="user_level" name="memberlevel" readonly>
+                                    {% for level in CardLevels %}
+                                    {% if level.value !== data.users.memberlevel %}
+                                    <option value="<%= level.value %>"><%= level.text %></option>
+                                    {% else %}
+                                    <option value="<%= level.value %>" selected="selected"><%= level.text %></option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_pay" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 付款类型
+                            </label>
+
+                            <div class="col-sm-8">
+                                <select class="form-control" id="user_pay" name="paymenttype">
+                                    {% for type in PaymentTypes %}
+                                    {% if type.value != data.users.paymenttype %}
+                                    <option value="<%= type.value %>"><%= type.text %></option>
+                                    {% else %}
+                                    <option value="<%= type.value %>" selected="selected"><%= type.text %></option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_credit_limit" class="col-sm-4 control-label">信用额度</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="user_credit_limit" name="creditlimit"
+                                       placeholder="信用额度"autocomplete="off"
+                                       data-val="true"
+                                       data-val-regex-pattern="^([1-9]\d*\.\d+|0\.[1-9]\d*|[1-9]\d*)"
+                                       data-val-regex="信用额度只能是正数"
+                                       value="<%= data.users.creditlimit %>">
+                                <div data-valmsg-for="creditlimit" data-valmsg-replace="true"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_period" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 有效期至
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="user_period" name="validityperiod"
+                                       placeholder="会员卡有效期" autocomplete="off"
+                                       data-val="true" data-val-required="有效期不能为空"
+                                       value="<%= data.users.validityperiod %>">
+                                <div data-valmsg-for="validityperiod" data-valmsg-replace="true"></div>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label for="user_sales" class="col-sm-4 control-label">
+                                <span class="text-danger">*</span> 销售员
+                            </label>
+
+                            <div class="col-sm-8">
+                                <select class="form-control" id="user_sales" name="salesmannumber">
+                                    {% for sale in data.sales %}
+                                    {% if sale.username != data.users.salesmannumber %}
+                                    <option value="<%= sale.username %>"><%= sale.username %></option>
+                                    {% else %}
+                                    <option value="<%= sale.username %>" selected="selected"><%= sale.username %></option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="user_address" class="col-sm-2 control-label">联系地址</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="user_address" name="addr"
+                                       placeholder="联系地址" value="<%= data.users.addr %>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_comments" class="col-sm-2 control-label">备注</label>
+
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="user_comments" name="remarks" rows="3"
+                                          placeholder="备注" value="<%= data.users.remarks %>"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="user_bind" name="user_bind" value="1"
+                                        {% if data.users.cardnumber %} checked="checked" {% endif %}> 继续发卡
+                                    </label>
+                                    <div class="text-warning">说明: 点击确定后, 弹出发卡对话框, 在里面输入卡号</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group sc-ui-submit">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <p class="sc-submit-tips"></p>
+                            <button type="button" class="btn btn-primary sc-submit">
+                                <span class="glyphicon glyphicon-ok"></span> 确 定
+                            </button>
+                            <a href="/users" class="btn btn-default">
+                                <span class="glyphicon glyphicon-arrow-left"></span> 返 回
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sc-ui-dialog-overlay" style="display: none;"></div>
+{% endblock %}
+
+{% block scripts %}
+{% parent %}
+<!--SCRIPT_PLACEHOLDER-->
+<script src="/public/app/users/users_add.js?__inline"></script>
+{% endblock %}

@@ -1,0 +1,339 @@
+@charset "utf-8"
+
+// 通用
+html
+body
+    -webkit-font-smoothing antialiased
+    width 100%
+    height 100vh
+    background #F5FAFF
+    color #666666
+    overflow-x hidden
+a
+    text-decoration none
+    &:hover
+        text-decoration none
+table
+    td
+        vertical-align middle !important
+
+.sub-header
+    padding-bottom 10px
+    border-bottom 1px solid #EEEEEE
+
+.navbar-fixed-top
+    border 0
+
+// 表单错误信息提示
+.input-validation-error
+    border 1px solid #EF4F4F
+.field-validation-error
+    color #EF4F4F
+
+.placeholders
+    margin-bottom 30px
+    text-align center
+    h4
+        margin-bottom 0
+.placeholder
+    margin-bottom 20px
+    img
+        display inline-block
+        border-radius 50%
+
+// 弹窗灰层
+.sc-ui-dialog-overlay
+    position absolute
+    width 100%
+    height 100%
+    left 0
+    top 0
+    background #DCDCDC
+    opacity 0.6
+    z-index 80
+
+// 充值,绑定
+.sc-ui-money-card
+    position absolute
+    left 16%
+    top 20px
+    width 660px
+    z-index 100
+    .dialog
+        .dialog-btn
+            margin-right 20px
+.sc-ui-bind-card
+    position absolute
+    left 30%
+    top 80px
+    width 400px
+    z-index 100
+    .dialog
+        .dialog-btn
+            margin-right 20px
+
+// 快捷方式
+.sc-ui-quick-visit
+    position fixed
+    right 70px
+    bottom 10px
+    z-index 900
+    .quick-visit
+        width 100px
+        height 100px
+        .gooey-menu-item
+            text-align center
+            img
+                width 40px
+                height 40px
+
+// 2016/5/26
+// tiny-alert overwrite style
+.rDialog
+    min-width 140px
+    .rDialog-wrap
+        opacity .8
+    .rDialog-content
+        font-size 1em
+    .rDialog-ok
+        background-color #337AB7 !important
+        font-size 1em
+    .rDialog-cancel
+        background-color #999999 !important
+        font-size 1em
+
+// header
+.sc-header
+    background #22489c
+    background -ms-linear-gradient(top, #22489c,  #81c0ea);
+    background -moz-linear-gradient(top,#22489c, #81c0ea);
+    background -webkit-gradient(linear, 0% 0%, 0% 100%,from(#22489c), to(#81c0ea));
+    background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#22489c), to(#81c0ea));
+    background -webkit-linear-gradient(top, #22489c, #81c0ea);
+    background -o-linear-gradient(top, #22489c, #81c0ea);
+    a
+        color #FFFFFF !important
+    .sc-header-navbar
+        li
+            .badge
+                background-color #e9322d
+        .dropdown-menu
+            background #81c0ea
+            border-top-style none
+            li
+                .sc-header-navbar-icon
+                    margin-right 10px
+                a:hover
+                a:focus
+                    background #2FAEF6
+        .sc-header-navbar-icon
+            width 18px
+            height 18px
+        li:hover
+        li:focus
+            .dropdown-menu
+                display block
+
+// left navigator
+.sc-sidebar
+    position fixed
+    overflow hidden
+    width 66px
+    top 51px
+    bottom 0
+    left 0
+    padding 10px
+    background #81c0ea
+    background -ms-linear-gradient(top, #81c0ea,  #337ab7);
+    background -moz-linear-gradient(top,#81c0ea, #337ab7);
+    background -webkit-gradient(linear, 0% 0%, 0% 100%,from(#81c0ea), to(#337ab7));
+    background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81c0ea), to(#337ab7));
+    background -webkit-linear-gradient(top, #81c0ea, #337ab7);
+    background -o-linear-gradient(top, #81c0ea, #337ab7);
+    border-right: 1px solid #EEEEEE
+    z-index 1000
+    li
+        border-bottom 1px inset #337ab7
+        padding 0 4px
+        .sc-sidebar-icon
+            width 36px
+            height 36px
+        p
+            font-size 12px
+            text-align center
+            color #FFFFFF
+    .nav-sidebar
+        margin-right -21px
+        margin-bottom 20px
+        margin-left -20px
+    .nav-sidebar > li > a
+        padding-right 20px
+        padding-left 20px
+    .nav-sidebar > .active > a,
+    .nav-sidebar > .active > a:hover,
+    .nav-sidebar > .active > a:focus
+        color #FFFFFF
+        background-color #337ab7
+    .nav-sidebar > li > a:hover,
+    .nav-sidebar > li > a:focus
+        color #FFFFFF
+        background-color #2FAEF6
+
+// main container
+.sc-main
+    margin 60px 10px 40px 90px
+    .sc-form-search
+        .form-group
+            margin-right 6px
+            margin-bottom 6px
+            label
+                width 70px
+                text-align right
+            input,select
+                width 160px
+            .btn
+                width 100px
+
+// path navigator
+.sc-path
+    border-radius 6px
+    .pull-right
+        margin-top -55px
+
+// data table
+.sc-table
+    table
+        border 1px solid #81c0ea
+        th.sort
+            cursor pointer
+            .glyphicon
+                display none
+        th.sort-asc
+            .glyphicon-arrow-up
+                display inline-block
+            .glyphicon-arrow-down
+                display none
+        th.sort-desc
+            .glyphicon-arrow-up
+                display none
+            .glyphicon-arrow-down
+                display inline-block
+        .sc-table-header
+            background #337ab7
+            background -ms-linear-gradient(top, #81c0ea,  #337ab7);
+            background -moz-linear-gradient(top,#81c0ea, #337ab7);
+            background -webkit-gradient(linear, 0% 0%, 0% 100%,from(#81c0ea), to(#337ab7));
+            background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81c0ea), to(#337ab7));
+            background -webkit-linear-gradient(top, #81c0ea, #337ab7);
+            background -o-linear-gradient(top, #81c0ea, #337ab7);
+            color #FFF
+
+// page
+.sc-page
+    border-top 1px solid #DCDCDC
+    padding 16px 6px
+    height 70px
+    .pagination
+        margin 0
+        float right
+    .sc-page-go
+        float right
+        display inline-block
+        margin-left 10px
+        input
+            display inline
+            width 60px
+            text-align center
+
+// block booking dialog
+.sc-block-booking
+    position absolute
+    left 20%
+    top 20px
+    width 760px
+    z-index 100
+    .width50
+        width 48%
+        display inline-block
+    .dialog
+        .dialog-btn
+            width 120px
+
+// pay confirm
+.sc-venue-booking-confirm
+    position absolute
+    left 30%
+    top 80px
+    width 400px
+    z-index 100
+
+// report navigator
+.sc-nav-reports
+    margin-top -60px
+
+// booking status color
+.enable
+    background #9bc747
+.selected
+    background #0272bd url("/public/images/status/selected.png") center no-repeat
+    background-size auto 60%
+.unpaid
+    background #337ab7
+.ordered
+    background #31708f
+.disable
+    background #CCCCCC
+    cursor not-allowed !important
+.locked
+    background #999999 url("/public/images/status/lock.png") center no-repeat
+    background-size auto 60%
+.finished
+    background #888888
+    cursor not-allowed !important
+.doing
+    background #FF8A38 url("/public/images/status/doing.png") center no-repeat
+    background-size auto 60%
+.warning
+    background #A94442 url("/public/images/status/warning.png") center no-repeat
+    background-size auto 60%
+
+// booking status front color
+.enable-color
+    color #9bc747
+.selected-color
+    color #0272bd
+.unpaid-color
+    color #337ab7
+.ordered-color
+    color #31708f
+.disable-color
+    color #CCCCCC
+.locked-color
+    color #999999
+.finished-color
+    color #888888
+.doing-color
+    color #FF8A38
+.warning-color
+    color #A94442
+
+// booking pay dialog
+.sc-booking-pay
+    position absolute
+    left 20%
+    top 20px
+    width 760px
+    z-index 100
+
+// tips message
+.header-tips-message
+    padding 6px
+    img
+        width 30px
+        margin-right 10px
+    .message
+        .num
+            color #FF8A38
+            font-weight 700
+    .btn
+        margin-top -2px

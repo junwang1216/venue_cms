@@ -1,0 +1,327 @@
+<div class="row sc-booking-steps" style="display: none">
+    <div class="panel panel-primary">
+        <div class="panel-heading">预订流程
+            <a class="btn btn-danger pull-right booking-steps-close" href="javascript:void(0);">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+        <div class="panel-body">
+            <div class="booking-steps">
+                <h1>选择场次</h1>
+                <div class="booking-steps-selected">
+                    <div class="panel panel-default">
+                        <ul class="list-group booking-selected-list"></ul>
+                        <div class="panel-body">
+                            <a class="btn btn-primary booking-selected-lock" href="javascript:void(0);"
+                               data-date="<%= data.currentDate %>">
+                                <span class="glyphicon glyphicon-lock"></span> 锁场
+                            </a>
+                            <button type="button" class="btn btn-primary pull-right booking-selected-next">
+                                <span class="glyphicon glyphicon-arrow-right"></span> 去支付
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <h1>用户信息</h1>
+                <div class="booking-steps-user">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form id="venue_booking_pay_form" class="form-horizontal" action="" method="post"
+                                  novalidate onsubmit="return false;">
+                                <input type="hidden" value="0" id="pay_booking_site_class" name="siteclass">
+                                <input type="hidden" value="3" id="pay_booking_user_class" name="userclass">
+                                <input type="hidden" value="<%= data.currentDate %>" id="pay_booking_date" name="date">
+                                <input type="hidden" value="1" name="schedulchannel">
+                                <input type="hidden" value="" id="pay_booking_member_number" name="membernumber">
+                                <input type="hidden" value="" id="pay_booking_type" name="paymenttype">
+                                <input type="hidden" value="" id="pay_booking_list" name="list">
+                                <input type="hidden" value="" id="pay_booking_member_name" name="membername">
+                                <div class="form-group">
+                                    <label for="person_user_name" class="col-sm-3 control-label">姓名</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="person_user_name" name="user_name"
+                                               placeholder="姓名" value="散客" autocomplete="off">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="btn btn-primary user-search" href="javascript:void(0);">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="person_user_mobile" class="col-sm-3 control-label">手机号</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="person_user_mobile" name="fitphone"
+                                               placeholder="手机号码" autocomplete="off"
+                                               data-val="true" data-val-required="手机号码不能为空"
+                                               data-val-regex-pattern="^1\d{10}$"
+                                               data-val-regex="手机号码格式错误">
+                                        <div data-valmsg-for="fitphone" data-valmsg-replace="true"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="person_user_remarks" class="col-sm-3 control-label">备注</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="person_user_remarks" name="remarks"
+                                               placeholder="备注" value="" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pay_booking_amount" class="col-sm-3 control-label">预计(元)</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="pay_booking_amount" name="amount"
+                                               placeholder="预计价格" value="" autocomplete="off" readonly>
+                                    </div>
+                                </div>
+                                <p class="sc-submit-tips"></p>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-primary pull-left booking-unpay" data-val="0">
+                                            <span class="glyphicon glyphicon-shopping-cart"></span> 预定
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-primary pull-right booking-pay" data-val="1">
+                                            <span class="glyphicon glyphicon-usd"></span> 付款
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h1>提交支付</h1>
+                <div class="booking-steps-pay">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form id="venue_pay_form" class="form-horizontal" novalidate onsubmit="return false;">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="pay_order_no" class="col-sm-2 control-label">订单号</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="pay_order_no" name="orderno" placeholder="订单号"
+                                                   value="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="pay_ex_money" class="col-sm-4 control-label">附加费用(元)</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pay_ex_money" name="addcharges"
+                                                   placeholder="附加费用" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pay_ex_money_note" class="col-sm-4 control-label">附加费用说明</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pay_ex_money_note" name="addchargesexplain"
+                                                   placeholder="附加费用说明" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pay_money_type" class="col-sm-4 control-label">付款方式</label>
+
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="pay_money_type" name="paymentmethod">
+                                                <option value="1">支票</option>
+                                                <option value="1">支票</option>
+                                                <option value="1">支票</option>
+                                                <option value="1">支票</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="pay_se_money" class="col-sm-4 control-label">优惠金额(元)</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pay_se_money" name="preamount"
+                                                   placeholder="优惠金额" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pay_se_money_note" class="col-sm-4 control-label">优惠金额说明</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pay_se_money_note" name="preamountexplain"
+                                                   placeholder="优惠金额说明" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pay_money_no" class="col-sm-4 control-label">支票号</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pay_money_no" name="checknumber"
+                                                   placeholder="支票号" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="pay_order_remark" class="col-sm-2 control-label">备注</label>
+
+                                        <div class="col-sm-10">
+                                                        <textarea class="form-control" rows="3" id="pay_order_remark"
+                                                                  name="remarks" placeholder="备注" autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="pay_order_money" class="col-sm-2 control-label">实收金额(元)</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pay_order_money" name="paidamount"
+                                                   placeholder="实收金额" value="" readonly>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <!--<button class="btn btn-danger dialog-close">
+                                                <span class="glyphicon glyphicon-remove"></span> 关闭
+                                            </button>-->
+                                            <button class="btn btn-primary dialog-confirm">
+                                                <span class="glyphicon glyphicon-ok"></span> 确定
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="sc-submit-tips"></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h1>支付结果</h1>
+                <div class="booking-steps-result">
+                    <div class="alert alert-success">支付成功!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/public/lib/jquery/jquery-steps/jquery.steps.js"></script>
+<script>
+    var init = {
+        // 初始化预订流程步骤
+        initBookingSteps: function () {
+            var $uiBookingSteps = $(".sc-booking-steps");
+
+            // 初始化预订流程步骤
+            $uiBookingSteps.find(".booking-steps").steps({
+                enableFinishButton: false,
+                enablePagination: false,
+                enableAllSteps: false
+            });
+
+            this.bindBookingSelected($uiBookingSteps.find(".booking-steps"));
+        },
+        // 绑定已选择场次
+        bindBookingSelected: function ($uiBookingSteps) {
+            var $uiBookingSelected = $uiBookingSteps.find(".booking-steps-selected");
+            var $uiBookingTable = $(".sc-venue-booking").find(".sc-booking-select");
+
+            // 取消已选择的场地
+            $uiBookingSelected.on("click", ".selected-cancel", function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var siteNumber = $this.parents("li").attr("data-site");
+                var startTime = $this.parents("li").attr("data-time-start");
+                var endTime = $this.parents("li").attr("data-time-end");
+
+                $uiBookingTable.find('tr[data-area-value="' + siteNumber + '"]')
+                        .find('td[data-time-start="' + startTime + '"][data-time-end="' + endTime + '"]')
+                        .addClass("enable").removeClass("selected").html("");
+
+                $this.parents(".list-group-item").remove();
+
+                if ($uiBookingSelected.find(".list-group-item").size() == 0) {
+                    $uiBookingSelected.hide();
+                }
+            });
+
+            // 锁场
+            $uiBookingSelected.on("click", ".booking-selected-lock", function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var $list = $uiBookingSelected.find(".booking-selected-list li");
+                var listSize = $list.size();
+                var list = [];
+
+                for (var i = 0; i < listSize; i++) {
+                    list.push({
+                        sitenumber: $list.eq(i).attr("data-site"),
+                        starttime: $list.eq(i).attr("data-time-start"),
+                        endtime: $list.eq(i).attr("data-time-end")
+                    });
+                }
+
+                if ($this.attr("working")) {
+                    return;
+                }
+                $this.attr("working", "working");
+
+                var $dialog = $.dialog({
+                    content: '您确定要锁定这' + listSize + '个可预订场地吗?',
+                    title: 'alert',
+                    width: 'auto',
+                    height: 'auto',
+                    lock: true,
+                    ok: function () {
+                        $.post('/venue/LockVenueBookings', {
+                            date: $this.attr("data-date"),
+                            list: JSON.stringify(list)
+                        }, function (res) {
+                            if (res.status == 200) {
+                                location.reload();
+                            }
+                            $this.attr("working", "");
+                        }).fail(function (err) {
+                            console.log(err);
+                            $this.attr("working", "");
+                        });
+                    },
+                    cancel: function () {
+                        $dialog.close();
+                        $this.attr("working", "");
+                    },
+                    okText: '确定',
+                    cancelText: '取消'
+                });
+            });
+
+            // 锁定去支付
+            $uiBookingSelected.on("click", ".booking-selected-next", function (e) {
+                e.preventDefault();
+
+                var $list = $uiBookingSelected.find(".list-group-item");
+                var listSize = $list.size();
+                var list = [];
+                var totalAmount = 0;
+
+                for (var i = 0; i < listSize; i++) {
+                    var amount = parseInt($list.eq(i).attr("data-amount"));
+
+                    totalAmount += amount;
+                    list.push({
+                        "sitenumber": $list.eq(i).attr("data-site"),
+                        "starttime": $list.eq(i).attr("data-time-start"),
+                        "endtime": $list.eq(i).attr("data-time-end"),
+                        "amount": amount
+                    });
+                }
+
+                $("#pay_booking_list").val(JSON.stringify(list));
+                $("#pay_booking_amount").val(totalAmount.toFixed(2));
+                $uiBookingSteps.steps("next", 1);
+            });
+        }
+    }
+</script>
